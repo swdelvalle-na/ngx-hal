@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/infinum/ngx-hal/tree/master.svg?style=svg)](https://circleci.com/gh/infinum/ngx-hal/tree/master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ngx-hal&metric=alert_status)](https://sonarcloud.io/dashboard?id=ngx-hal)
 
 # NgxHal
 
