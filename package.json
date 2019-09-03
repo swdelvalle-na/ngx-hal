@@ -19,7 +19,8 @@
     "ng": "ng",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "sonar-init": "bash ./bin/sonar-init.sh"
   },
   "husky": {
     "hooks": {
