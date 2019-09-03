@@ -7,7 +7,9 @@ jobs:
       - checkout
       - restore_cache:
           key: ngx-hal-{{ .Branch }}-{{ checksum "package-lock.json" }}
-      - run: npm install
+      - run:
+          name: Installing dependencies
+          command: npm install
       - save_cache:
           key: ngx-hal-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
@@ -15,9 +17,10 @@ jobs:
       - run:
           name: Tests
           command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+  sonar:
+    docker:
+      - image: sonarsource/sonarcloud-scan
+    steps:
       - run:
-          name: Sonar initialization
-          command: npm run sonar-init
-      - run:
-          name: Sonar Analyze
+          name: Analyzing the code with SonarCloud
           command: sonar-scanner -Dsonar.projectKey=ngx-hal -Dsonar.organization=infinum-javascript -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN}
