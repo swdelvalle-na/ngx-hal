@@ -23,7 +23,7 @@ jobs:
     steps:
       - run:
           name: Analyzing the code with SonarCloud
-          command: sonar-scanner -Dsonar.projectKey=ngx-hal -Dsonar.organization=infinum-javascript -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN} -Dsonar-branch-name=${CIRCLE_BRANCH}
+          command: sonar-scanner -Dsonar.projectKey=ngx-hal -Dsonar.organization=infinum-javascript -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch.name=${CIRCLE_BRANCH}
 workflows:
   version: 2
   build_test_analyze:
