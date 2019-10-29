@@ -21,7 +21,7 @@ import { UpdateOptions } from '../interfaces/update-options.interface';
 
 export abstract class HalModel {
   private _config: ModelOptions = this['_config'] || DEFAULT_MODEL_OPTIONS;
-  private temporarySelfLink: string = null;
+  private _temporarySelfLink: string = null;
   private localModelIdentificator: string;
 
   constructor(
@@ -407,11 +407,11 @@ export abstract class HalModel {
   }
 
   public get selfLink(): string {
-    return this.links && this.links[SELF_PROPERTY_NAME] ? this.links[SELF_PROPERTY_NAME].href : this.temporarySelfLink;
+    return this.links && this.links[SELF_PROPERTY_NAME] ? this.links[SELF_PROPERTY_NAME].href : this._temporarySelfLink;
   }
 
   public set selfLink(link: string) {
-    this.temporarySelfLink = link;
+    this._temporarySelfLink = link;
   }
 
   private replaceRelationshipModel<T extends HalModel>(relationshipName: string, relationshipModel: T): void {
