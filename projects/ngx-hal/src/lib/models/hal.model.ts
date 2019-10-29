@@ -22,7 +22,7 @@ import { UpdateOptions } from '../interfaces/update-options.interface';
 export abstract class HalModel {
   private _config: ModelOptions = this['_config'] || DEFAULT_MODEL_OPTIONS;
   private _temporarySelfLink: string = null;
-  private localModelIdentificator: string;
+  private _localModelIdentificator: string;
 
   constructor(
     protected resource: RawHalResource = {},
@@ -37,7 +37,7 @@ export abstract class HalModel {
   }
 
   public get uniqueModelIdentificator(): string {
-    return this.selfLink || this.localModelIdentificator;
+    return this.selfLink || this._localModelIdentificator;
   }
 
   public get id(): string {
@@ -433,6 +433,6 @@ export abstract class HalModel {
   }
 
   private setLocalModelIdentificator(): void {
-    this.localModelIdentificator = `local-model-identificator-${generateUUID()}`;
+    this._localModelIdentificator = `local-model-identificator-${generateUUID()}`;
   }
 }
