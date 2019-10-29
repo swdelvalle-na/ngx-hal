@@ -20,7 +20,7 @@ import { GeneratePayloadOptions } from '../interfaces/generate-payload-options.i
 import { UpdateOptions } from '../interfaces/update-options.interface';
 
 export abstract class HalModel {
-  private config: ModelOptions = this['config'] || DEFAULT_MODEL_OPTIONS;
+  private _config: ModelOptions = this['_config'] || DEFAULT_MODEL_OPTIONS;
   private temporarySelfLink: string = null;
   private localModelIdentificator: string;
 
@@ -49,15 +49,15 @@ export abstract class HalModel {
   }
 
   public get endpoint(): string {
-    return this.config.endpoint || 'unknownModelEndpoint';
+    return this._config.endpoint || 'unknownModelEndpoint';
   }
 
   public get networkConfig(): NetworkConfig {
-    return this.config.networkConfig;
+    return this._config.networkConfig;
   }
 
   public get type(): string {
-    return this.config.type;
+    return this._config.type;
   }
 
   public getHalDocumentClass<T extends this>(): HalDocumentConstructor<T> {
