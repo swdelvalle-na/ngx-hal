@@ -245,14 +245,16 @@ export class DatastoreService {
     fetchedModels: T | HalDocument<T> = null,
     storePartialModels?: boolean
   ): Observable<T | HalDocument<T>> {
+    let models$;
+
     if (fetchedModels) {
-      return of(fetchedModels);
+      models$ = of(fetchedModels);
+    } else {
+      models$ = this.makeGetRequest(url, requestsOptions.mainRequest, modelClass, isSingleResource, storePartialModels);
     }
 
-    const httpRequest$ = this.makeGetRequest(url, requestsOptions.mainRequest, modelClass, isSingleResource, storePartialModels);
-
     if (includeRelationships.length) {
-      return httpRequest$.pipe(
+      return models$.pipe(
         flatMap((model: T | HalDocument<T>) => {
           const models: Array<T> = isSingleResource ? ([model] as Array<T>) : (model as HalDocument<T>).models;
 
@@ -270,7 +272,7 @@ export class DatastoreService {
       );
     }
 
-    return httpRequest$;
+    return models$;
   }
 
   private triggerFetchingModelRelationships<T extends HalModel>(
